@@ -1,52 +1,41 @@
 # Advent of Code task #1
 import time
-from typing import Counter
+from collections import Counter
 
 calories_list = []
 elves_list = dict()
-print(elves_list)
 
 with open('calories_input.txt', 'r') as calories_file:
     calories_inputs = calories_file.readlines()
-    #print(calories_inputs)
     for line in calories_inputs:
-        #print(line[:-1])
         calories_list.append(line[:-1])
 
 elf_counter = 1
 
 
 for calorie in calories_list:
-
-    if elves_list.get(f'Elf {elf_counter}', "Don't exist") is "Don't exist":
+    if elves_list.get(f'Elf {elf_counter}', "Don't exist") == "Don't exist":
         elves_list[f"Elf {elf_counter}"] = list()
         if len(calorie) > 0:
             temp = elves_list[f"Elf {elf_counter}"]
-            print(f"this is a temp: {temp}")
             temp.append(int(calorie))
         else:
             elf_counter +=1
     else:
         if len(calorie) > 0:
             temp = elves_list[f"Elf {elf_counter}"]
-            print(f"this is a temp: {temp}")
             temp.append(int(calorie))
         else:
             elf_counter +=1
 
+for elf, calories_list in elves_list.items():
+    elves_list[elf] = sum(calories_list)
 
-print(elves_list)
+print(f"that is elf with the highest amount of calories: {max(elves_list.values())}")
 
-'''
-
-    if len(calorie) > 0:
-        elves_list[f'Elf {counter}']
-        calorie = int(calorie)
-        print(f"that is a calorie type{type(calorie)} and a value: {calorie}")
-        elf_calories_list.append(calorie)
-        print(f"this is a list after append{elf_calories_list}")
-        print(f"that is sum: {sum(elf_calories_list)}")
-    else:
-        print(f"I have found empty string and sum is: {sum(elf_calories_list)}")
-    #print(f"type: {type(calorie)} and the calorie: {calorie}")
-'''    
+three_highest = Counter(elves_list)
+most_common = three_highest.most_common(3)
+sum_three_highest = 0
+for item in most_common:
+    sum_three_highest += item[1]
+print(f"thos is sum of three the highest amount of calories carries by elves: {sum_three_highest}")
