@@ -46,12 +46,13 @@ for instruction in movements:
     cutted_list = stocks.get(f"{instruction[1]}")[-cut:]
     rest_list = [element for element in stocks.get(f"{instruction[1]}") if element not in cutted_list]
     stocks[f"{instruction[1]}"] = rest_list
-    stocks[f"{instruction[2]}"] += cutted_list
-    pass
+    print(f"before: {stocks[f'{instruction[2]}']}")
+    stocks[f"{instruction[2]}"].extend(cutted_list)
+    print(f"after: {stocks[f'{instruction[2]}']}")
+
 
 
 letters = ''
 for box in stocks:
     if stocks.get(f"{box}") is not None:
         print(stocks.get(f"{box}"))
-        time.sleep(5)
