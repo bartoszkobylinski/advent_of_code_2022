@@ -1,10 +1,12 @@
 #Knowit Julekalendar 2022 dag1
 
-letter = [] 
+letter = '' 
 dictionary = []
 
 with open('letter.txt', 'r') as file_letter:
-    letter = file_letter.readlines()
+    letter += file_letter.readline()
+
+print(letter)
 
 with open('dictionary.txt','r') as file_dictionary:
     dictionary = file_dictionary.readlines()
@@ -25,19 +27,20 @@ for translation in temp_dictionary:
 del temp_dictionary
 
 temporary_word = ''
+translated_letter = ''
+temporary_letter = ''
 
-for character in letter[0]:
-    temporary_word += character
+
+for character in letter:
+    temporary_word +=character
     if temporary_word in new_dictionary.keys():
-        print("jeeee")
+        print("znalazlem")
         print(temporary_word)
         print(new_dictionary[temporary_word])
-    else:
+        translated_letter +=new_dictionary[temporary_word]
+        print(letter)
+        letter=letter[len(temporary_word):]
+        print(letter)
+        temporary_word = ''
         continue
-    
-
-
-
-
-
 

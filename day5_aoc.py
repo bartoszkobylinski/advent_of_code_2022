@@ -8,6 +8,7 @@ with open(FILE, 'r') as input_file:
     temporary_movement = temporary_stokcs[10:]
     movements = []
     for instruction in temporary_movement:
+    #for instruction in temporary_stokcs:
         one_instruction = []
         instruction = instruction.split(" ")
         one_instruction.append(int(instruction[1]))
@@ -26,6 +27,13 @@ stocks = {
     '8': ['P','G','L','T','D','V','C','M'],
     '9': ['W','Q','N','J','F','M','L']
 }
+'''
+stocks = {
+    '1': ['Z','N'],
+    '2': ['M','C','D'],
+    '3': ['P']
+}
+'''
 
 '''
 for instruction in movements:
@@ -39,20 +47,17 @@ letters = ''
 for box in stocks:
     letters += stocks[box][-1]
 
-print(letters)
+print(movements)
     
 for instruction in movements:
     cut = int(instruction[0])
     cutted_list = stocks.get(f"{instruction[1]}")[-cut:]
     rest_list = [element for element in stocks.get(f"{instruction[1]}") if element not in cutted_list]
     stocks[f"{instruction[1]}"] = rest_list
-    print(f"before: {stocks[f'{instruction[2]}']}")
+    #print(f"before: {stocks[f'{instruction[2]}']}")
     stocks[f"{instruction[2]}"].extend(cutted_list)
-    print(f"after: {stocks[f'{instruction[2]}']}")
+    #print(f"after: {stocks[f'{instruction[2]}']}")
 
 
-
-letters = ''
-for box in stocks:
-    if stocks.get(f"{box}") is not None:
-        print(stocks.get(f"{box}"))
+for k,v in stocks.items():
+    print(k, v)
